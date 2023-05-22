@@ -29,6 +29,9 @@ let endgame = false;
 let isGoodRegameAnswer = false;
 
 
+Game();
+
+function Game(){
 while(regame === true)
 {
     randNum = Math.floor(Math.random() * 100);
@@ -38,9 +41,10 @@ while(regame === true)
         do
         {
             valeurChoisie = window.prompt("Quel nombre choisissez-vous?");
-
-            if(isNaN(valeurChoisie)){
-                parseInt(valeurChoisie);
+            valeurChoisie = parseInt(valeurChoisie);
+            
+            if(Number.isInteger(valeurChoisie)){
+                
                 if(valeurChoisie < 101 && valeurChoisie > -1){
                     isGoodValue = true;
                 }
@@ -55,19 +59,23 @@ while(regame === true)
                 window.alert("Vous devez taper un nombre");
                 isGoodValue = false;
             }
+            
+            if(valeurChoisie === null){
+                return;
+            }
         }while(!isGoodValue);
         
         if(valeurChoisie < randNum)
         {
-            window.alert("Le nombre recherchéest plus grand que " + valeurChoisie);
+            window.alert("Le nombre mystere est plus grand que " + valeurChoisie);
         }
         else if(valeurChoisie > randNum)
         {
-            window.alert("Le nombre recherchéest plus petit que " + valeurChoisie);
+            window.alert("Le nombre mystere est plus petit que " + valeurChoisie);
         }
         else
         {
-            window.alert("Ouiiiiiii! Le nombre recherché est bien " + valeurChoisie);
+            window.alert("Ouiiiiiii! Le nombre mystere est bien " + valeurChoisie);
             endgame = true;
         }
     }
@@ -79,22 +87,36 @@ while(regame === true)
         {
             answerRegame = window.prompt("Voulez-vous rejouer? y/n");
         
-            if(answerRegame !== 'y' || answerRegame !== 'n')
+            if(answerRegame == 'y')
             {
-                window.alert("pardon?");
+                isGoodRegameAnswer = true;
+                
             
             }
-            else
+            else if(answerRegame == 'n')
             {
                 isGoodRegameAnswer = true;
             }
+            else if(answerRegame === null)
+            {
+                return;
+            }   
+            else
+            {
+                isGoodRegameAnswer = false;
+                window.alert("pardon?");
+            }
         }
-        if(answerRegame === 'y'){
+        if(answerRegame == 'y'){
             regame = true;
+            endgame = false;
         }
         else
         {
             regame = false;
+            endgame = true;
         }
     }
 }
+}
+
