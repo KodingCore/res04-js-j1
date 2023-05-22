@@ -32,91 +32,92 @@ let isGoodRegameAnswer = false;
 Game();
 
 function Game(){
-while(regame === true)
-{
-    randNum = Math.floor(Math.random() * 100);
-    window.alert("Trouvez le nombre secret entre 0 et 100");
-    while(endgame === false)
+    while(regame === true)
     {
-        do
+        randNum = Math.floor(Math.random() * 100);
+        window.alert("Trouvez le nombre secret entre 0 et 100");
+        while(endgame === false)
         {
-            valeurChoisie = window.prompt("Quel nombre choisissez-vous?");
-            valeurChoisie = parseInt(valeurChoisie);
+            do
+            {
+                valeurChoisie = window.prompt("Quel nombre choisissez-vous?");
+                valeurChoisie = parseInt(valeurChoisie);
             
-            if(Number.isInteger(valeurChoisie)){
+                if(Number.isInteger(valeurChoisie)){
                 
-                if(valeurChoisie < 101 && valeurChoisie > -1){
-                    isGoodValue = true;
+                    if(valeurChoisie < 101 && valeurChoisie > -1){
+                        isGoodValue = true;
+                    }
+                    else
+                    {
+                        window.alert("Vous devez taper un nombre entre 0 et 100");
+                        isGoodValue = false;
+                    }
                 }
                 else
                 {
-                    window.alert("Vous devez taper un nombre entre 0 et 100");
+                    window.alert("Vous devez taper un nombre");
                     isGoodValue = false;
                 }
+            
+                if(valeurChoisie === null)
+                {
+                    return;
+                }
+            }while(!isGoodValue);
+        
+            if(valeurChoisie < randNum)
+            {
+                window.alert("Le nombre mystere est plus grand que " + valeurChoisie);
+            }
+            else if(valeurChoisie > randNum)
+            {
+                window.alert("Le nombre mystere est plus petit que " + valeurChoisie);
             }
             else
             {
-                window.alert("Vous devez taper un nombre");
-                isGoodValue = false;
+                window.alert("Ouiiiiiii! Le nombre mystere est bien " + valeurChoisie);
+                endgame = true;
             }
-            
-            if(valeurChoisie === null){
-                return;
-            }
-        }while(!isGoodValue);
+        }
         
-        if(valeurChoisie < randNum)
-        {
-            window.alert("Le nombre mystere est plus grand que " + valeurChoisie);
-        }
-        else if(valeurChoisie > randNum)
-        {
-            window.alert("Le nombre mystere est plus petit que " + valeurChoisie);
-        }
-        else
-        {
-            window.alert("Ouiiiiiii! Le nombre mystere est bien " + valeurChoisie);
-            endgame = true;
-        }
-    }
-    
-    
-    if(endgame)
-    {
-        while(!isGoodRegameAnswer)
-        {
-            answerRegame = window.prompt("Voulez-vous rejouer? y/n");
         
-            if(answerRegame == 'y')
+        if(endgame)
+        {
+            while(!isGoodRegameAnswer)
             {
-                isGoodRegameAnswer = true;
+                answerRegame = window.prompt("Voulez-vous rejouer? y/n");
+        
+                if(answerRegame == 'y')
+                {
+                    isGoodRegameAnswer = true;
                 
             
+                }
+                else if(answerRegame == 'n')
+                {
+                    isGoodRegameAnswer = true;
+                }
+                else if(answerRegame === null)
+                {
+                    return;
+                }   
+                else
+                {
+                    isGoodRegameAnswer = false;
+                    window.alert("pardon?");
+                }
             }
-            else if(answerRegame == 'n')
-            {
-                isGoodRegameAnswer = true;
+            if(answerRegame == 'y'){
+                regame = true;
+                endgame = false;
             }
-            else if(answerRegame === null)
-            {
-                return;
-            }   
             else
             {
-                isGoodRegameAnswer = false;
-                window.alert("pardon?");
+                regame = false;
+                endgame = true;
             }
         }
-        if(answerRegame == 'y'){
-            regame = true;
-            endgame = false;
-        }
-        else
-        {
-            regame = false;
-            endgame = true;
-        }
     }
-}
 }
 
